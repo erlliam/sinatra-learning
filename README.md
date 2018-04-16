@@ -1,2 +1,2 @@
 # sinatralearning
-Documentation of my sinatra learning.
+  Learning Ruby Sinatra.
