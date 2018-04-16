@@ -2,6 +2,10 @@
 require "sinatra"
 
 get "/" do
-	"Hello worlds"
+	File.read("index.html")
+end
+
+post "/" do
+	"#{params["inputOne"]}"
 end
 
