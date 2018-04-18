@@ -9,12 +9,16 @@ get "/" do
 end
 
 post "/" do
+	html = ""
 	@post = Post.create(
 		:title => "My first DataMapper post",
 		:body => "#{params["inputOne"]}",
 		:created_at => Time.now
 		)
-	"#{Post.get(1).title}, #{Post.get(1).body}, #{Post.get(1).created_at}"
+	Post.all.each { |x|
+		html << "<p>#{x.body}</p>"
+	}
+	html
 end
 
 class Post
