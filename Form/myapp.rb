@@ -21,13 +21,10 @@ get "/" do
 	File.read("index.html")
 end
 
-post "/" do
-	html = ""
-	@post = Post.create(
-		:title => "My first DataMapper post",
-		:body => "#{params["inputOne"]}",
-		:created_at => Time.now
-		)
+get "/post" do
+	html = "
+	<a href='/'>Create post</a>
+	"	
 	Post.all.each { |x|
 		html << "
 		<div>
@@ -39,8 +36,17 @@ post "/" do
 	html
 end
 
+post "/post" do
+	@post = Post.create(
+		:title => "My first DataMapper post",
+		:body => "#{params["inputOne"]}",
+		:created_at => Time.now
+		)
+	redirect "/post"
+end
+
 get "/delete/:id" do
 	post_to_delete = Post.get(params["id"])
 	post_to_delete.destroy
-	redirect "/"
+	redirect "/post"
 end
