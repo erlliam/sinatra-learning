@@ -18,23 +18,13 @@ DataMapper.finalize
 DataMapper.auto_migrate!
 DataMapper.auto_upgrade!
 
+
 get "/" do
 	erb :index
 end
 
 get "/post" do
-	html = "
-	<a href='/'>Create post</a>
-	"	
-	Post.all.each { |x|
-		html << "
-		<div>
-			<p>#{x.body}</p>
-			<a href='/delete/#{x.id}'>X</a>
-		</div>
-		"
-	}
-	html
+	erb :post, :locals => {:post => Post}
 end
 
 post "/post" do

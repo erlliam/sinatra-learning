@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Posts</title>
+</head>
+<body>
+	<a href='/'>Create post</a>
+	<ul>
+		<% post.all.each do |x| %>
+			<%= "<li>#{x.body}&emsp;<a href='/delete/#{x.id}'>DELETE</a></li>" %>
+		<% end %>
+	</ul>
+</body>
+</html>
