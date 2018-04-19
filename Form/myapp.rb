@@ -2,7 +2,7 @@
 require "sinatra"
 require "data_mapper"
 
-DataMapper.setup(:default, "sqlite::memory:")
+DataMapper.setup(:default, "sqlite:database.db")
 
 class Post
 	include DataMapper::Resource
@@ -16,9 +16,10 @@ end
 
 DataMapper.finalize
 DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 
 get "/" do
-	File.read("index.html")
+	erb :index
 end
 
 get "/post" do
