@@ -1,0 +1,33 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Arial";
+}
+
+.button {
+	text-decoration: none;
+	color: black;
+	margin-left: 32px;
+}
+
+form {
+	list-style-type: none;
+}
+
+input[type="text"] {
+	border: 1px solid #555555;
+	padding: 8px 8px;
+}
+
+input[type="submit"] {
+	color: white;
+	background-color: #555555;
+	margin-left: 4px;
+	padding: 9px 8px;
+	border: none;
+	text-align: center;
+}
+
+.post-form {
+	margin-top: 32px;
+}

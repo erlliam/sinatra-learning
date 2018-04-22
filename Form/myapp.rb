@@ -35,3 +35,11 @@ get "/delete/:id" do
 	Post.get(params["id"]).destroy
 	redirect "/post"
 end
+
+get "/login" do
+	erb :login
+end
+
+post "/login" do
+	"#{params["username"]}"
+end

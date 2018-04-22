@@ -1,0 +1,45 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Arial";
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.posts {
+	width: 80%;
+	margin: auto;
+}
+
+.delete {
+	color: red;
+	float: right;
+	margin-right: 4px;
+}
+
+p {
+	margin: 0px;
+	margin-left: 4px;
+	display: inline-block;
+}
+
+h1 {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px 0px;
+	height: 50%;
+	border: 1px solid #555555;
+	border-radius: 5px;
+}
+
+li {
+}

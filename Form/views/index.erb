@@ -2,12 +2,18 @@
 <html>
 <head>
 	<title>Form</title>
+	<link rel="stylesheet" href="index.css">
 </head>
 <body>
-	<a href="/post">View all posts</a>
-	<form method="post" action="/post">
-		<input type="text" name="inputOne">
-		<input type="submit" name="submit">
-	</form>
+	<div>
+		<a class="button" href="/post">View all posts</a>
+		<a class="button" href="/login">Login</a>
+	</div>
+	<div class="post-form">
+		<form method="post" action="/post">
+			<input type="text" name="inputOne"><input type="submit" name="submit" value="Post">
+		</form>
+	</div>
+
 </body>
 </html>

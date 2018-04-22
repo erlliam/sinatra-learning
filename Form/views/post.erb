@@ -2,13 +2,19 @@
 <html>
 <head>
 	<title>Posts</title>
+	<link rel="stylesheet" href="post.css">
 </head>
 <body>
-	<a href='/'>Create post</a>
-	<ul>
-		<% post.all.each do |x| %>
-			<%= "<li>#{x.body}&emsp;<a href='/delete/#{x.id}'>DELETE</a></li>" %>
-		<% end %>
-	</ul>
+	<div>
+		<a class="button" href='/'>Create post</a>
+	</div>
+	<div class="posts">
+		<h1>Posts</h1>
+		<ul>
+			<% post.all.each do |x| %>
+				<%= "<li><p>#{x.body}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
+			<% end %>
+		</ul>
+	</div>
 </body>
 </html>
