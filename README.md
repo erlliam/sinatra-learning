@@ -6,5 +6,5 @@
   Sinatra 2.0.1
   DataMapper 1.2.0
   
-##
+## How to run
   Download the files and change into the directory that contains "myapp.rb" and run using "ruby myapp.rb"
