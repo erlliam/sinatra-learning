@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
-	<link rel="stylesheet" href="login.css">
+	<title>Sign up</title>
 </head>
 <body>
 	<%= File.read("./views/navbar.erb") %>
-
 	<div>
-		<form method="post" action="/login">
-			<label for="username">Username</label>
+		<form method="post" action="/signup">
+			<label for="username">Create a username</label>
 			<input type="text" name="username" required>
 
-			<label for="password">Password</label>
+			<label for="password">Create a password</label>
 			<input type="password" name="password" required>
 
 			<button type="submit">Login</button>

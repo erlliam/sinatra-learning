@@ -5,13 +5,11 @@
 	<link rel="stylesheet" href="index.css">
 </head>
 <body>
-	<div>
-		<a class="button" href="/post">View all posts</a>
-		<a class="button" href="/login">Login</a>
-	</div>
+	<%= File.read("./views/navbar.erb") %>
+
 	<div class="post-form">
 		<form method="post" action="/post">
-			<input type="text" name="inputOne"><input type="submit" name="submit" value="Post">
+			<input type="text" name="inputOne" required><input type="submit" name="submit" value="Post">
 		</form>
 	</div>
 

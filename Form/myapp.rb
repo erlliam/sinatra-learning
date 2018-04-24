@@ -12,15 +12,24 @@ class Post
 	property :created_at, DateTime
 end
 
+class User
+	include DataMapper::Resource
+	property :id, Serial
+	property :username, String
+	property :password, String
+end
+
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
+enable :sessions
+
 get "/" do
-	erb :index
+	erb :index, :locals => {:user => session[:user]}
 end
 
 get "/post" do
-	erb :post, :locals => {:post => Post}
+	erb :post, :locals => {:post => Post, :user => session[:user]}
 end
 
 post "/post" do
@@ -36,10 +45,22 @@ get "/delete/:id" do
 	redirect "/post"
 end
 
+get "/signup" do
+	erb :signup, :locals => {:user => session[:user]}
+end
+
+post "/signup" do
+	@user = User.create(
+		:username => params["username"],
+		:password => params["password"])
+	redirect "/login"
+end
+
 get "/login" do
-	erb :login
+	erb :login, :locals => {:user => session[:user]}
 end
 
 post "/login" do
-	"#{params["username"]}"
+	session[:user] = params["username"]
+	redirect "/"
 end
