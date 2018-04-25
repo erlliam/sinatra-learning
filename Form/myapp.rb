@@ -25,19 +25,26 @@ DataMapper.auto_upgrade!
 enable :sessions
 
 get "/" do
-	erb :index, :locals => {:user => session[:user]}
+	erb :index
 end
 
 get "/post" do
-	erb :post, :locals => {:post => Post, :user => session[:user]}
+	@Post = Post
+	erb :post
 end
 
 post "/post" do
-	@post = Post.create(
-		:title => "My first DataMapper post",
-		:body => "#{params["inputOne"]}",
-		:created_at => Time.now)
-	redirect "/post"
+	@status_message = "Login to post!"
+	@Post = Post
+	if session[:user_id]
+		@post = Post.create(
+			:title => "My first DataMapper post",
+			:body => "#{params["inputOne"]}",
+			:created_at => Time.now)
+		@status_message = "Successfully posted."
+	end
+
+	erb :post
 end
 
 get "/delete/:id" do
@@ -46,7 +53,7 @@ get "/delete/:id" do
 end
 
 get "/signup" do
-	erb :signup, :locals => {:user => session[:user]}
+	erb :signup
 end
 
 post "/signup" do
@@ -57,10 +64,20 @@ post "/signup" do
 end
 
 get "/login" do
-	erb :login, :locals => {:user => session[:user]}
+	if session[:user_id]
+		redirect "/"
+	end
+	erb :login
 end
 
 post "/login" do
-	session[:user] = params["username"]
+	username = params["username"]
+	password = params["password"]
+
+	User.all.each do |x|
+		if username == x.username && password == x.password
+			session[:user_id] = username
+		end
+	end
 	redirect "/"
 end
