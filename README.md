@@ -8,3 +8,9 @@
   
 ## How to run
   Download the files and change into the directory that contains "myapp.rb" and run using "ruby myapp.rb"
+
+## To-do list
+  Major CSS work <br />
+  Better password storing <br />
+  Profile account <br />
+  Etc
