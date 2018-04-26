@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Form</title>
-	<link rel="stylesheet" href="index.css">
-</head>
-<body>
-	<%= File.read("./views/navbar.erb") %>
+<link rel="stylesheet" href="index.css">
 
-	<div class="post-form">
-		<form method="post" action="/post">
-			<input type="text" name="inputOne" required><input type="submit" name="submit" value="Post">
-		</form>
-	</div>
-
-</body>
-</html>
+<div class="post-form">
+	<form method="post" action="/post">
+		<input type="text" name="inputOne" required><input type="submit" name="submit" value="Post">
+	</form>
+</div>

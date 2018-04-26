@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Posts</title>
-	<link rel="stylesheet" href="post.css">
-</head>
-<body>
-	<%= File.read("./views/navbar.erb") %>
+<link rel="stylesheet" href="post.css">
 
-	<div class="posts">
-		<h1>Posts</h1>
-		<ul>
-			<% @Post.all.each do |x| %>
-				<%= "<li><p>#{x.body}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
-			<% end %>
-		</ul>
-	</div>
-	<% if @status_message %>
-		<p><%= @status_message%></p>
-	<% end %>
-</body>
-</html>
+<div class="posts">
+	<h1>Posts</h1>
+	<ul class="post-ul">
+		<% @Post.all.each do |x| %>
+			<%= "<li><p>#{x.body}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
+		<% end %>
+	</ul>
+</div>
+<% if @status_message %>
+	<p><%= @status_message%></p>
+<% end %>

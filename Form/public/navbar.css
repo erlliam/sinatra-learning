@@ -9,13 +9,21 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #333;
+	overflow: hidden;
 }
 
 .nav-ul li {
-	display: inline;
+	float: left;
 }
 
 .nav-ul li a {
+	display: block;
 	text-decoration: none;
 	color: white;
+	text-align: center;
+	padding: 14px 16px;
+}
+
+.active {
+	background-color: #4CAF50;
 }

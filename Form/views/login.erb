@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-	<link rel="stylesheet" href="login.css">
-</head>
-<body>
-	<%= File.read("./views/navbar.erb") %>
+<link rel="stylesheet" href="login.css">
 
-	<div>
-		<form method="post" action="/login">
-			<label for="username">Username</label>
-			<input type="text" name="username" required>
+<div>
+	<form method="post" action="/login">
+		<label for="username">Username</label>
+		<input type="text" name="username" required>
 
-			<label for="password">Password</label>
-			<input type="password" name="password" required>
+		<label for="password">Password</label>
+		<input type="password" name="password" required>
 
-			<button type="submit">Login</button>
-		</form>
-	</div>
-</body>
-</html>
+		<button type="submit">Login</button>
+	</form>
+</div>

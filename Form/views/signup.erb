@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sign up</title>
-</head>
-<body>
-	<%= File.read("./views/navbar.erb") %>
-	<div>
-		<form method="post" action="/signup">
-			<label for="username">Create a username</label>
-			<input type="text" name="username" required>
 
-			<label for="password">Create a password</label>
-			<input type="password" name="password" required>
 
-			<button type="submit">Sign up</button>
-		</form>
-	</div>
-</body>
-</html>
+<div>
+	<form method="post" action="/signup">
+		<label for="username">Create a username</label>
+		<input type="text" name="username" required>
+
+		<label for="password">Create a password</label>
+		<input type="password" name="password" required>
+
+		<button type="submit">Sign up</button>
+	</form>
+</div>
