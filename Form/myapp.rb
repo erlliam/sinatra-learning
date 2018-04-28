@@ -7,9 +7,8 @@ DataMapper.setup(:default, "sqlite://#{Dir.pwd}/database.db")
 class Post
 	include DataMapper::Resource
 	property :id, Serial
-	property :title, String
+	property :author, String
 	property :body, Text
-	property :created_at, DateTime
 end
 
 class User
@@ -25,6 +24,9 @@ DataMapper.auto_upgrade!
 enable :sessions
 
 get "/" do
+	if session[:user_id] 
+		@flash = "Logged in as #{session[:user_id]}"
+	end
 	erb :index
 end
 
@@ -38,9 +40,8 @@ post "/post" do
 	@Post = Post
 	if session[:user_id]
 		@post = Post.create(
-			:title => "My first DataMapper post",
-			:body => "#{params["inputOne"]}",
-			:created_at => Time.now)
+			:author => session[:user_id],
+			:body => "#{params["inputOne"]}")
 		@status_message = "Successfully posted."
 	end
 
@@ -61,6 +62,8 @@ post "/signup" do
 		:username => params["username"],
 		:password => params["password"])
 	redirect "/login"
+	@flash = "Signed up Successfully"
+
 end
 
 get "/login" do
@@ -73,11 +76,19 @@ end
 post "/login" do
 	username = params["username"]
 	password = params["password"]
-
 	User.all.each do |x|
 		if username == x.username && password == x.password
 			session[:user_id] = username
 		end
 	end
-	redirect "/"
+
+	if session[:user_id] 
+		redirect "/"
+		@flash = "Successfully logged in!"
+
+	else
+		redirect "/login"
+		@flash = "Failed to login."
+
+	end
 end
