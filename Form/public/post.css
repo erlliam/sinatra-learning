@@ -1,26 +1,22 @@
-a {
-	text-decoration: none;
-	color: black;
-}
-
-.posts {
-	width: 80%;
+.posts-div {
+	width: 60%;
 	margin: auto;
 }
 
 .delete {
+	text-decoration: none;
 	color: red;
 	float: right;
 	margin-right: 4px;
 }
 
-p {
+.post {
 	margin: 0px;
 	margin-left: 4px;
 	display: inline-block;
 }
 
-h1 {
+.title {
 	margin: auto;
 	width: 50%;
 	text-align: center;
@@ -32,7 +28,6 @@ h1 {
 	padding: 0px 0px;
 	height: 50%;
 	border: 1px solid #555555;
-	border-radius: 5px;
 }
 
 li {

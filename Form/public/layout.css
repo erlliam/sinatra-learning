@@ -27,3 +27,9 @@ body {
 .active {
 	background-color: #4CAF50;
 }
+
+.flash {
+	margin: 0;
+	display: block;
+	text-align: center;
+}

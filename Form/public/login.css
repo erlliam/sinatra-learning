@@ -1,0 +1,23 @@
+label {
+	display: inline-block;
+	width: 200px;
+}
+
+input[type="text"] {
+	border: 1px solid #555555;
+	padding: 8px 8px;
+}
+
+input[type="password"] {
+	border: 1px solid #555555;
+	padding: 8px 8px;
+}
+
+input[type="submit"] {
+	display: block;
+	color: white;
+	background-color: #555555;
+	padding: 9px 8px;
+	border: none;
+	text-align: center;
+}

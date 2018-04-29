@@ -27,7 +27,7 @@
 	</script>
 
 	<% if session[:flash] %>
-		<p><%= session[:flash] %></p>
+		<p class="flash"><%= session[:flash] %></p>
 		<% session.delete(:flash) %>
 	<% end %>
 

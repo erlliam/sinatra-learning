@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="post.css">
 
-<div class="posts">
-	<h1>Posts</h1>
+<div class="posts-div">
+	<h1 class="title">Posts</h1>
 	<ul class="post-ul">
 		<% Post.all.each do |x| %>
-			<%= "<li><p>#{x.body} - #{x.author}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
+			<%= "<li><p class='post'>#{x.body} - #{x.author}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
 		<% end %>
 	</ul>
 </div>
