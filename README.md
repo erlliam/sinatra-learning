@@ -8,9 +8,12 @@
   
 ## How to run
   Download the files and change into the directory that contains "myapp.rb" and run using "ruby myapp.rb"
+  
+## How it works
+  It is a website where you can post messages. You must be logged in to do so.
 
 ## To-do list
   Major CSS work <br />
-  Better password storing <br />
+  Better password storing (hash and salt?) <br />
   Profile account <br />
-  Etc
+  Friends list
