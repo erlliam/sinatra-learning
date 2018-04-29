@@ -23,6 +23,7 @@ DataMapper.auto_upgrade!
 
 enable :sessions
 
+
 get "/" do
 	if session[:user_id] 
 		session[:flash] = "Logged in as #{session[:user_id]}."
@@ -31,14 +32,12 @@ get "/" do
 end
 
 get "/post" do
-	@Post = Post
 	erb :post
 end
 
 post "/post" do
-	@Post = Post
 	if session[:user_id]
-		@post = Post.create(
+		Post.create(
 			:author => session[:user_id],
 			:body => "#{params["inputOne"]}")
 		session[:flash] = "Successfully posted."
@@ -52,7 +51,7 @@ end
 
 get "/delete/:id" do
 	if session[:user_id] == Post.get(params["id"]).author
-		Post.get(params["id"]).destroy	
+		Post.get(params["id"]).destroy
 		redirect "/post"
 	else
 		session[:flash] = "You must be the owner of the post to delete it."

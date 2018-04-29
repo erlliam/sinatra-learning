@@ -3,7 +3,7 @@
 <div class="posts">
 	<h1>Posts</h1>
 	<ul class="post-ul">
-		<% @Post.all.each do |x| %>
+		<% Post.all.each do |x| %>
 			<%= "<li><p>#{x.body} - #{x.author}</p><a class='delete' href='/delete/#{x.id}'>X</a></li>" %>
 		<% end %>
 	</ul>
