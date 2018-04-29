@@ -25,7 +25,7 @@ enable :sessions
 
 get "/" do
 	if session[:user_id] 
-		@flash = "Logged in as #{session[:user_id]}"
+		session[:flash] = "Logged in as #{session[:user_id]}."
 	end
 	erb :index
 end
@@ -36,21 +36,28 @@ get "/post" do
 end
 
 post "/post" do
-	@status_message = "Login to post!"
 	@Post = Post
 	if session[:user_id]
 		@post = Post.create(
 			:author => session[:user_id],
 			:body => "#{params["inputOne"]}")
-		@status_message = "Successfully posted."
+		session[:flash] = "Successfully posted."
+	else
+		session[:flash] = "Must be logged in to post."
+		redirect "/"
 	end
 
-	erb :post
+	redirect "/post"
 end
 
 get "/delete/:id" do
-	Post.get(params["id"]).destroy
-	redirect "/post"
+	if session[:user_id] == Post.get(params["id"]).author
+		Post.get(params["id"]).destroy	
+		redirect "/post"
+	else
+		session[:flash] = "You must be the owner of the post to delete it."
+		redirect "/post"
+	end
 end
 
 get "/signup" do
@@ -62,7 +69,7 @@ post "/signup" do
 		:username => params["username"],
 		:password => params["password"])
 	redirect "/login"
-	@flash = "Signed up Successfully"
+	session[:flash] = "Signed up Successfully"
 
 end
 
@@ -84,11 +91,17 @@ post "/login" do
 
 	if session[:user_id] 
 		redirect "/"
-		@flash = "Successfully logged in!"
+		session[:flash] = "Successfully logged in!"
 
 	else
 		redirect "/login"
-		@flash = "Failed to login."
+		session[:flash] = "Failed to login."
 
 	end
+end
+
+get "/logout" do
+	session.delete(:user_id)
+	session[:flash] = "Logged out."
+	redirect "/"
 end
