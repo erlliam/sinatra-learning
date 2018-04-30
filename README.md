@@ -5,6 +5,7 @@
   Ruby 2.3.3 <br />
   Sinatra 2.0.1 <br />
   DataMapper 1.2.0 <br />
+  Bcrypt 3.1.11 <br />
   
 ## How to run
   Download the files and change into the directory that contains "myapp.rb" and run using "ruby myapp.rb"
