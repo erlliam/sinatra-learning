@@ -15,6 +15,5 @@
 
 ## To-do list
   Major CSS work <br />
-  Better password storing (hash and salt?) <br />
   Profile account <br />
   Friends list
