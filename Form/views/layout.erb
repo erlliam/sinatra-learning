@@ -11,7 +11,7 @@
 			<li><a href="/">Index</a></li>
 			<li><a href="/post">Post</a></li>
 			<% if session[:user_id] %>
-				<li><a href="/account">Account</a></li>
+				<li><a href="/account/<%=session[:user_id]%>">Account</a></li>
 				<li><a href="/logout">Log out</a></li>
 			<% else %>
 				<li><a href="/login">Login</a></li>

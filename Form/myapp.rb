@@ -1,6 +1,7 @@
 # myapp.rb
 require "sinatra"
 require "data_mapper"
+require "bcrypt"
 
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/database.db")
 
@@ -15,7 +16,7 @@ class User
 	include DataMapper::Resource
 	property :id, Serial
 	property :username, String
-	property :password, String
+	property :password_hash, String, :length => 60
 end
 
 DataMapper.finalize
@@ -26,7 +27,7 @@ enable :sessions
 
 get "/" do
 	if session[:user_id] 
-		session[:flash] = "Logged in as #{session[:user_id]}."
+		session[:flash] = "Logged in as #{session[:user_name]}."
 	end
 	erb :index
 end
@@ -64,11 +65,11 @@ get "/signup" do
 end
 
 post "/signup" do
-	@user = User.create(
+	user = User.create(
 		:username => params["username"],
-		:password => params["password"])
-	redirect "/login"
+		:password_hash => BCrypt::Password.create(params["password"]))
 	session[:flash] = "Signed up Successfully"
+	redirect "/login"
 
 end
 
@@ -83,18 +84,20 @@ post "/login" do
 	username = params["username"]
 	password = params["password"]
 	User.all.each do |x|
-		if username == x.username && password == x.password
-			session[:user_id] = username
+		if username == x.username && BCrypt::Password.new(x.password_hash) == password
+			session[:user_id] = x.id
+			session[:user_name] = username
 		end
 	end
 
-	if session[:user_id] 
-		redirect "/"
+	if session[:user_id]
 		session[:flash] = "Successfully logged in!"
 
+		redirect "/"
+
 	else
-		redirect "/login"
 		session[:flash] = "Failed to login."
+		redirect "/login"
 
 	end
 end
@@ -103,4 +106,12 @@ get "/logout" do
 	session.delete(:user_id)
 	session[:flash] = "Logged out."
 	redirect "/"
+end
+
+get "/account" do
+	erb :account
+end
+
+get "/account/:id" do
+	"under dev"
 end
