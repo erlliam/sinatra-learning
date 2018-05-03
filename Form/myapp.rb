@@ -31,7 +31,7 @@ end
 
 
 get "/" do
-	if session[:id] 
+	if user
 		session[:flash] = "Logged in as #{user.username}."
 	end
 	erb :index
@@ -57,7 +57,7 @@ post "/post" do
 end
 
 get "/delete/:id" do
-	if user.username == Post.get(params["id"]).author
+	if user && user.username == Post.get(params["id"]).author
 		Post.get(params["id"]).destroy
 		user.update(:posts =>  user.posts - 1)
 		redirect "/post"
@@ -116,6 +116,5 @@ get "/logout" do
 end
 
 get "/account" do
-	puts user.posts
 	erb :account
 end
