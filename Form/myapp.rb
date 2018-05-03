@@ -17,6 +17,7 @@ class User
 	property :id, Serial
 	property :username, String
 	property :password_hash, String, :length => 60
+	property :posts, Integer
 end
 
 DataMapper.finalize
@@ -24,10 +25,14 @@ DataMapper.auto_upgrade!
 
 enable :sessions
 
+def user()
+	User.get(session[:id])
+end
+
 
 get "/" do
-	if session[:user_id] 
-		session[:flash] = "Logged in as #{session[:user_name]}."
+	if session[:id] 
+		session[:flash] = "Logged in as #{user.username}."
 	end
 	erb :index
 end
@@ -37,10 +42,11 @@ get "/post" do
 end
 
 post "/post" do
-	if session[:user_id]
+	if user
 		Post.create(
-			:author => session[:user_id],
+			:author => user.username,
 			:body => "#{params["inputOne"]}")
+		user.update(:posts => user.posts + 1)
 		session[:flash] = "Successfully posted."
 	else
 		session[:flash] = "Must be logged in to post."
@@ -51,8 +57,9 @@ post "/post" do
 end
 
 get "/delete/:id" do
-	if session[:user_id] == Post.get(params["id"]).author
+	if user.username == Post.get(params["id"]).author
 		Post.get(params["id"]).destroy
+		user.update(:posts =>  user.posts - 1)
 		redirect "/post"
 	else
 		session[:flash] = "You must be the owner of the post to delete it."
@@ -67,14 +74,15 @@ end
 post "/signup" do
 	user = User.create(
 		:username => params["username"],
-		:password_hash => BCrypt::Password.create(params["password"]))
+		:password_hash => BCrypt::Password.create(params["password"]),
+		:posts => 0)
 	session[:flash] = "Signed up Successfully"
 	redirect "/login"
 
 end
 
 get "/login" do
-	if session[:user_id]
+	if user
 		redirect "/"
 	end
 	erb :login
@@ -85,12 +93,11 @@ post "/login" do
 	password = params["password"]
 	User.all.each do |x|
 		if username == x.username && BCrypt::Password.new(x.password_hash) == password
-			session[:user_id] = x.id
-			session[:user_name] = username
+			session[:id] = x.id
 		end
 	end
 
-	if session[:user_id]
+	if user
 		session[:flash] = "Successfully logged in!"
 
 		redirect "/"
@@ -103,15 +110,12 @@ post "/login" do
 end
 
 get "/logout" do
-	session.delete(:user_id)
+	session.clear
 	session[:flash] = "Logged out."
 	redirect "/"
 end
 
 get "/account" do
+	puts user.posts
 	erb :account
-end
-
-get "/account/:id" do
-	"under dev"
 end
